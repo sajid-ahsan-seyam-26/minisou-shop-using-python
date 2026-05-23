@@ -106,6 +106,22 @@ def search_sale():
             output_text.insert(tk.END,"customer_name"+"\n")
             output_text.insert(tk.END,"phone numebr"+"\n")
             output_text.insert(tk.END,"product_code"+"\n")
+            output_text.insert(tk.END,"product name"+"\n")
+            output_text.insert(tk.END,"category"+"\n")
+            output_text.insert(tk.END,"quantity"+"\n")
+            output_text.insert(tk.END,"unitprice"+"\n")
+            output_text.insert(tk.END,"subtotal"+"\n")
+            output_text.inset(tk,END,"discount"+"\n")
+            output_text.insert(tk.END,"vta 5%"+"\n")
+            output_etxt.insert(tk.END,"total amount"+"\n")
+            found=true
+            break
+        if found==False:
+            ouput_text.insert(tk.END,"sales not found")
+
+def update_sale():
+    search_invoide_id=entery_search_invoice,get()
+    
             
 
 
