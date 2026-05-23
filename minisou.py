@@ -12,14 +12,14 @@ inventory = {
 invoice_counter=1
 def add_sale():
     global invoice_counter
-    customername=enter_customer.get()
+    customer_name=enter_customer.get()
     phone_number=entery_phone.get()
     product_code=entery_product_code.get()
     quantity_text=entery_quantity.get()
     discount_text=entery_discount.get()
 
 
-    if counter_name=="" or Product_code=="" or quantity_text=="":
+    if customer_name=="" or product_code=="" or quantity_text=="":
         messagebox.showerror("error","please fill in all required fields")
         return
     if product_code not in inventory:
@@ -73,6 +73,7 @@ def add_sale():
         messageboc.showinfo(
             "success",
             "sales added successfully .\ninvoice Id:"+invoice_id)
+        
 
 
 
