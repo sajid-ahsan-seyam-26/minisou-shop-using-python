@@ -12,14 +12,14 @@ inventory = {
 invoice_counter=1
 def add_sale():
     global invoice_counter
-    customer_name=enter_customer.get()
+    customer_name=enter_customer.get() #ekahne sob input gula catch korbe
     phone_number=entery_phone.get()
     product_code=entery_product_code.get()
     quantity_text=entery_quantity.get()
     discount_text=entery_discount.get()
 
 
-    if customer_name=="" or product_code=="" or quantity_text=="":
+    if customer_name=="" or product_code=="" or quantity_text=="": #jodi kono 
         messagebox.showerror("error","please fill in all required fields")
         return
     if product_code not in inventory:
@@ -73,8 +73,40 @@ def add_sale():
         messageboc.showinfo(
             "success",
             "sales added successfully .\ninvoice Id:"+invoice_id)
+        clear_fields()
+        def show_all_sales():
+            output_text.delete(1.0,tk.END)
+            if len(sales)==0:
+                output_text.insert(tk.End,"No sales data found")
+            else:
+                count=1
+                for sale in sales:
+                    output_text.insert(tk.END,"sale"+str(count)+"\n")
+                    output_text.insert(tk.END,"Invoice id:"+sale["invoice_id"]+"\n")
+                    output_text.insert(tk.END,"phone number"+sale["phone_number"]+"\n")
+                    output_text.insert(tk.END,"customer name"+sale["customer_name"]+"\n")
+                    output_text.insert(tk.END,"product code"+sale["product_code"+"\n"])
+                    output_text.insert(tk.END,"product name"+sale["product_name"]+"\n")
+                    output_text.insert(tk.END,"chatagory"+sale["chatagory"]+"\n")
+                    output_text.insert(tk.END,"quantity"+sales["quantity"]+"\n")
+                    output_text.insert(tk.END,"unit price"+sales["unit_price"]+"\n")
+                    output_text.insert(tk.END,"subtotal"+sales["subtotal"]+"\n")
+                    output_text.insert(tk.END,"Discount"+sales["discount"]+"\n")
+                    output_text.insert(tk.END,"vat 5%"+sales["vat"]+"\n")
+                    output_text.insert(tk.END,"toatl_amount"+sales["total_amount"]+"\n")
+                    count=count+1
+def search_sale():
+    search_invoice_id=entery_search_invoice.get()
+    output_text.delete(1,0,tk.END)
+    found=False
+    for sale in sales:
+        if sale["invoice_id"]==search_invoice_id:
+            output_text.insert(tk.END,"sales found")
+            output_text.insert(tk.END,"invoice id":"+sale[customer_name]"+"\n")
+            output_text.insert(tk.END,"customer_name"+"\n")
+            output_text.insert(tk.END,"phone numebr"+"\n")
+            output_text.insert(tk.END,"product_code"+"\n")
+            
+
+
         
-
-
-
-
