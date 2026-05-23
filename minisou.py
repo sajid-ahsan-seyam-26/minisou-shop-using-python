@@ -1,128 +1,158 @@
-import tkinter as tk 
-from tkinter import messagebox
-inventory = {
-    "P101": {"name": "Mini Perfume", "category": "Beauty", "price": 350, "stock": 20},
-    "P102": {"name": "Plush Toy", "category": "Toy", "price": 650, "stock": 15},
-    "P103": {"name": "Water Bottle", "category": "Lifestyle", "price": 450, "stock": 25},
-    "P104": {"name": "Face Towel", "category": "Home", "price": 250, "stock": 30},
-    "P105": {"name": "Makeup Mirror", "category": "Beauty", "price": 500, "stock": 18},
-    "P106": {"name": "Travel Bag", "category": "Travel", "price": 1200, "stock": 10},
-    "P107": {"name": "Headphone", "category": "Electronics", "price": 900, "stock": 12}
-}
-invoice_counter=1
-def add_sale():
-    global invoice_counter
-    customer_name=enter_customer.get() #ekahne sob input gula catch korbe
-    phone_number=entery_phone.get()
-    product_code=entery_product_code.get()
-    quantity_text=entery_quantity.get()
-    discount_text=entery_discount.get()
+sales = []
 
-
-    if customer_name=="" or product_code=="" or quantity_text=="": #jodi kono 
-        messagebox.showerror("error","please fill in all required fields")
-        return
-    if product_code not in inventory:
-        messagebox.showerror("error","product code is not found")
-        return
-    try:
-        quantity=int(quantity_text)
-    except:
-        messagebox.showerror("error","quantity must be a number")
-    if quantity<=0:
-        messagebox.showerror("error","quantity must be greater than 0")
-        return
-    if discount_text=="":
-        discount_percent=0
-    else:
-        try:
-            discount_percent=float(discount_text)
-        except:
-            messagebox.showerror("error","discount must be a number")
-            return
-    if quantity>inventory[product_code]["stoke"]:
-        messagebox.showoring("stock error","not enough stock availabe")
-        return
-        product_name=inventory[product_code]["name"]
-        category=inventory[product_code]["category"]
-        unit_price=inventory[product_code]["price"]
-        subtotal=unit_price*quantity
-        discount_amount=subtitle*discount_percentage/100
-        amount_after_discount=subtotal-discount_amout
-        vat=amount-after_discount*0.05
-        total_amount=amount_after_discount+vat
-        invoice_id="m"+str(invoice_counter)
-        sales={
-        "invoice_id":invoice_id,
-        "customer name":phone_number,
-        "product_code":product_code,
-
-        "product_name":product_name,
-        "category":category,
-        "quantity":quantity,
-        "unit_price":quantity,
-        "subtotal":subtotal,
-        "discount_percentage":discount_percentage,
-        "discount_amount":discount_amount,
-        "vat":vat,
-        "total amount":total_amount
-        }
-        sales.append(sales)
-        inventory[product_cosde]["stock"]=inventory[product_code]["stock"]-quantity
-        invoice_counter=invoice_counter+1
-        messageboc.showinfo(
-            "success",
-            "sales added successfully .\ninvoice Id:"+invoice_id)
-        clear_fields()
-        def show_all_sales():
-            output_text.delete(1.0,tk.END)
-            if len(sales)==0:
-                output_text.insert(tk.End,"No sales data found")
-            else:
-                count=1
-                for sale in sales:
-                    output_text.insert(tk.END,"sale"+str(count)+"\n")
-                    output_text.insert(tk.END,"Invoice id:"+sale["invoice_id"]+"\n")
-                    output_text.insert(tk.END,"phone number"+sale["phone_number"]+"\n")
-                    output_text.insert(tk.END,"customer name"+sale["customer_name"]+"\n")
-                    output_text.insert(tk.END,"product code"+sale["product_code"+"\n"])
-                    output_text.insert(tk.END,"product name"+sale["product_name"]+"\n")
-                    output_text.insert(tk.END,"chatagory"+sale["chatagory"]+"\n")
-                    output_text.insert(tk.END,"quantity"+sales["quantity"]+"\n")
-                    output_text.insert(tk.END,"unit price"+sales["unit_price"]+"\n")
-                    output_text.insert(tk.END,"subtotal"+sales["subtotal"]+"\n")
-                    output_text.insert(tk.END,"Discount"+sales["discount"]+"\n")
-                    output_text.insert(tk.END,"vat 5%"+sales["vat"]+"\n")
-                    output_text.insert(tk.END,"toatl_amount"+sales["total_amount"]+"\n")
-                    count=count+1
-def search_sale():
-    search_invoice_id=entery_search_invoice.get()
-    output_text.delete(1,0,tk.END)
-    found=False
-    for sale in sales:
-        if sale["invoice_id"]==search_invoice_id:
-            output_text.insert(tk.END,"sales found")
-            output_text.insert(tk.END,"invoice id":"+sale[customer_name]"+"\n")
-            output_text.insert(tk.END,"customer_name"+"\n")
-            output_text.insert(tk.END,"phone numebr"+"\n")
-            output_text.insert(tk.END,"product_code"+"\n")
-            output_text.insert(tk.END,"product name"+"\n")
-            output_text.insert(tk.END,"category"+"\n")
-            output_text.insert(tk.END,"quantity"+"\n")
-            output_text.insert(tk.END,"unitprice"+"\n")
-            output_text.insert(tk.END,"subtotal"+"\n")
-            output_text.inset(tk,END,"discount"+"\n")
-            output_text.insert(tk.END,"vta 5%"+"\n")
-            output_etxt.insert(tk.END,"total amount"+"\n")
-            found=true
-            break
-        if found==False:
-            ouput_text.insert(tk.END,"sales not found")
 
 def update_sale():
-    search_invoide_id=entery_search_invoice,get()
-    
-            
+    search_invoice_id = entery_search_invoice.get()
+
+    if search_invoice_id == "":
+        messagebox.showerror("Error", "Enter invoice ID")
+        return
+
+    found = False
+
+    for sale in sales:
+
+        if sale["invoice_id"] == search_invoice_id:
+
+            product_code = entery_product_code.get()
+            quantity_text = entery_quantity.get()
+            discount_text = entery_discount.get()
+
+            if quantity_text == "":
+                messagebox.showerror("Error", "Enter quantity")
+                return
+
+            try:
+                quantity = int(quantity_text)
+            except:
+                messagebox.showerror("Error", "Quantity must be number")
+                return
+
+            if discount_text == "":
+                discount_percentage = 0
+            else:
+                try:
+                    discount_percentage = float(discount_text)
+                except:
+                    messagebox.showerror("Error", "Discount must be number")
+                    return
+
+            if quantity > inventory[product_code]["stock"]:
+                messagebox.showerror("Stock Error", "Not enough stock available")
+                return
+
+            unit_price = inventory[product_code]["price"]
+
+            subtotal = unit_price * quantity
+
+            discount_amount = subtotal * discount_percentage / 100
+
+            amount_after_discount = subtotal - discount_amount
+
+            vat = amount_after_discount * 0.05
+
+            total_amount = amount_after_discount + vat
+
+            sale["quantity"] = quantity
+            sale["subtotal"] = subtotal
+            sale["discount_percentage"] = discount_percentage
+            sale["discount_amount"] = discount_amount
+            sale["vat"] = vat
+            sale["total_amount"] = total_amount
+
+            messagebox.showinfo("Success", "Sale updated successfully")
+
+            found = True
+            break
+
+    if found == False:
+        messagebox.showerror("Error", "Invoice not found")
+
+
+def delete_sale():
+
+    search_invoice_id = entery_search_invoice.get()
+
+    if search_invoice_id == "":
+        messagebox.showerror("Error", "Enter invoice ID")
+        return
+
+    found = False
+
+    for sale in sales:
+
+        if sale["invoice_id"] == search_invoice_id:
+
+            sales.remove(sale)
+
+            messagebox.showinfo("Success", "Sale deleted successfully")
+
+            found = True
+            break
+
+    if found == False:
+        messagebox.showerror("Error", "Invoice not found")
+
+
+def clear_fields():
+
+    enter_customer.delete(0, tk.END)
+    entery_phone.delete(0, tk.END)
+    entery_product_code.delete(0, tk.END)
+    entery_quantity.delete(0, tk.END)
+    entery_discount.delete(0, tk.END)
+
+
+
+
+root = tk.Tk()
+root.title("Mini Shop Management System")
+root.geometry("900x700")
+
+
+tk.Label(root, text="Customer Name").pack()
+enter_customer = tk.Entry(root, width=40)
+enter_customer.pack()
+
+
+tk.Label(root, text="Phone Number").pack()
+entery_phone = tk.Entry(root, width=40)
+entery_phone.pack()
+
+
+tk.Label(root, text="Product Code").pack()
+entery_product_code = tk.Entry(root, width=40)
+entery_product_code.pack()
+
+
+tk.Label(root, text="Quantity").pack()
+entery_quantity = tk.Entry(root, width=40)
+entery_quantity.pack()
+
+
+tk.Label(root, text="Discount %").pack()
+entery_discount = tk.Entry(root, width=40)
+entery_discount.pack()
+
+tk.Label(root, text="Search Invoice ID").pack()
+entery_search_invoice = tk.Entry(root, width=40)
+entery_search_invoice.pack()
+
+tk.Button(root, text="Add Sale", command=add_sale).pack(pady=5)
+
+tk.Button(root, text="Show All Sales", command=show_all_sales).pack(pady=5)
+
+tk.Button(root, text="Search Sale", command=search_sale).pack(pady=5)
+
+tk.Button(root, text="Update Sale", command=update_sale).pack(pady=5)
+
+tk.Button(root, text="Delete Sale", command=delete_sale).pack(pady=5)
+
+
+output_text = tk.Text(root, width=100, height=20)
+output_text.pack(pady=10)
+
+root.mainloop()
 
 
         
