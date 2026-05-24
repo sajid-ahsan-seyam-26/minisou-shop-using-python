@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
 
-# ---------------- INVENTORY ----------------
 
 inventory = {
     "P101": {"name": "Mini Perfume", "category": "Beauty", "price": 350, "stock": 20},
@@ -17,7 +16,9 @@ sales = []
 invoice_counter = 1
 
 
-# ---------------- ADD SALE ----------------
+
+
+
 
 def add_sale():
 
@@ -48,7 +49,7 @@ def add_sale():
         messagebox.showerror("Error", "Quantity must be greater than 0")
         return
 
-    # Discount
+
     if discount_text == "":
         discount_percentage = 0
     else:
@@ -58,17 +59,17 @@ def add_sale():
             messagebox.showerror("Error", "Discount must be a number")
             return
 
-    # Stock check
+  
     if quantity > inventory[product_code]["stock"]:
         messagebox.showerror("Stock Error", "Not enough stock available")
         return
 
-    # Product details
+
     product_name = inventory[product_code]["name"]
     category = inventory[product_code]["category"]
     unit_price = inventory[product_code]["price"]
 
-    # Calculation
+   
     subtotal = unit_price * quantity
 
     discount_amount = subtotal * discount_percentage / 100
@@ -81,7 +82,7 @@ def add_sale():
 
     invoice_id = "M" + str(invoice_counter)
 
-    # Store sale
+    
     sale = {
         "invoice_id": invoice_id,
         "customer_name": customer_name,
@@ -100,7 +101,7 @@ def add_sale():
 
     sales.append(sale)
 
-    # Reduce stock
+    
     inventory[product_code]["stock"] -= quantity
 
     invoice_counter += 1
@@ -113,7 +114,7 @@ def add_sale():
     clear_fields()
 
 
-# ---------------- SHOW SALES ----------------
+
 
 def show_all_sales():
 
@@ -145,7 +146,7 @@ def show_all_sales():
         count += 1
 
 
-# ---------------- SEARCH SALE ----------------
+
 
 def search_sale():
 
@@ -181,7 +182,7 @@ def search_sale():
         output_text.insert(tk.END, "Sale not found")
 
 
-# ---------------- UPDATE SALE ----------------
+
 
 def update_sale():
 
@@ -225,6 +226,7 @@ def update_sale():
 
             sale["quantity"] = quantity
             sale["subtotal"] = subtotal
+            
             sale["discount_percentage"] = discount_percentage
             sale["discount_amount"] = discount_amount
             sale["vat"] = vat
@@ -239,7 +241,7 @@ def update_sale():
         messagebox.showerror("Error", "Invoice not found")
 
 
-# ---------------- DELETE SALE ----------------
+
 
 def delete_sale():
 
@@ -262,7 +264,7 @@ def delete_sale():
         messagebox.showerror("Error", "Invoice not found")
 
 
-# ---------------- CLEAR FIELDS ----------------
+
 
 def clear_fields():
 
@@ -273,7 +275,7 @@ def clear_fields():
     entry_discount.delete(0, tk.END)
 
 
-# ---------------- GUI ----------------
+
 
 root = tk.Tk()
 
@@ -282,49 +284,48 @@ root.title("Mini Shop Management System")
 root.geometry("900x700")
 
 
-# Customer Name
+
 tk.Label(root, text="Customer Name").pack()
 
 entry_customer = tk.Entry(root, width=40)
 entry_customer.pack()
 
 
-# Phone Number
 tk.Label(root, text="Phone Number").pack()
 
 entry_phone = tk.Entry(root, width=40)
 entry_phone.pack()
 
 
-# Product Code
+
 tk.Label(root, text="Product Code").pack()
 
 entry_product_code = tk.Entry(root, width=40)
 entry_product_code.pack()
 
 
-# Quantity
+
 tk.Label(root, text="Quantity").pack()
 
 entry_quantity = tk.Entry(root, width=40)
 entry_quantity.pack()
 
 
-# Discount
+
 tk.Label(root, text="Discount %").pack()
 
 entry_discount = tk.Entry(root, width=40)
 entry_discount.pack()
 
 
-# Search Invoice
+
 tk.Label(root, text="Search Invoice ID").pack()
 
 entry_search_invoice = tk.Entry(root, width=40)
 entry_search_invoice.pack()
 
 
-# Buttons
+
 tk.Button(root, text="Add Sale", width=20, command=add_sale).pack(pady=5)
 
 tk.Button(root, text="Show All Sales", width=20, command=show_all_sales).pack(pady=5)
@@ -336,7 +337,7 @@ tk.Button(root, text="Update Sale", width=20, command=update_sale).pack(pady=5)
 tk.Button(root, text="Delete Sale", width=20, command=delete_sale).pack(pady=5)
 
 
-# Output Box
+
 output_text = tk.Text(root, width=100, height=20)
 
 output_text.pack(pady=10)
